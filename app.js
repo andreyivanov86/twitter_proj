@@ -8,14 +8,13 @@ app.engine('html', nunjucks.render)
 nunjucks.configure('views', {noCache: true});
 
 const people = [{name: 'Full'}, {name: 'Stacker'}, {name: 'Son'}];
-
-// app.use(function(req, res, next) {
-//   console.log(res.method);
-//   next();
-// })
+const news = [{name: 'ESPN'}, {name: 'WSJ'}];
 
 app.get('/', (req, res) => {
-  res.render('index', {title: 'Hall of Fame', people} );
+  res.render('index', {title: 'Hall of Fame', object: people} );
+})
+app.get('/news', (req, res) => {
+  res.render('index', {title: 'Hall of Fame', object: news} );
 })
 
 app.listen(3000, function() {
