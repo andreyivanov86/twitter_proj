@@ -20,7 +20,6 @@
     "express": "^4.15.4",
     "lodash": "^4.17.4",
     "nodemon": "^1.12.1",
-    "nunjucks": "^3.0.1",
-    "volleyball": "^1.4.1"
+    "nunjucks": "^3.0.1"
   }
 }
