@@ -10,9 +10,11 @@ nunjucks.configure('views', {noCache: true});
 
 // renders accordingly with index.js (routes)
 app.use('/', router);
-// default public folder
+
+// default public folder using express.static middelware
 app.use(express.static('public'));
 
+// server listener
 app.listen(3000, function() {
   console.log('Server listening...');
 })
