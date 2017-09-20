@@ -9,7 +9,7 @@ app.engine('html', nunjucks.render)
 nunjucks.configure('views', {noCache: true});
 
 // renders accordingly with index.js (routes)
-app.use('/', router);
+app.use(router);
 
 // default public folder using express.static middelware
 app.use(express.static('public'));
