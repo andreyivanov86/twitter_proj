@@ -20,9 +20,10 @@ router.get('/tweets/:id', function(req, res, next) {
 })
 
 router.post('/tweets', function(req, res) {
-  var name = req.body.name;
-  var text = req.body.text;
-  tweetBank.add(name, text);
+  console.log('req body', req.body.name)
+  //var name = req.body.name;
+  //var text = req.body.text;
+  // tweetBank.add(name, text);
   res.redirect('/');
 });
 
