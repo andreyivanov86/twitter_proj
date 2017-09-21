@@ -2,17 +2,24 @@
 var express = require('express');
 var router = express.Router();
 var tweetBank = require('../tweetBank');
+var client = require('../db');
 
 module.exports = function makeRouterWithSockets (io) {
 
   // a reusable function
   function respondWithAllTweets (req, res, next){
-    var allTheTweets = tweetBank.list();
-    res.render('index', {
-      title: 'Twitter.js',
-      tweets: allTheTweets,
-      showForm: true
+    client.query('SELECT * FROM users JOIN tweets ON users.id = tweets.user_id', function (err, result) {
+      if (err) return next(err); // pass errors to Express
+      var tweets = result.rows;
+      console.log(tweets)
+      res.render('index', { title: 'Twitter.js', tweets: tweets, showForm: true });
     });
+    // client.query('SELECT * FROM users', function (err, result) {
+    //   if (err) return next(err); // pass errors to Express
+    //   var users = result.rows;
+    //   console.log(result.rows);
+    //   res.render('index', { title: 'Twitter.js', users: users, showForm: true });
+    // });
   }
 
   // here we basically treet the root view and tweets view as identical
@@ -45,6 +52,10 @@ module.exports = function makeRouterWithSockets (io) {
     io.sockets.emit('new_tweet', newTweet);
     res.redirect('/');
   });
+
+
+
+
 
   // // replaced this hard-coded route with general static routing in app.js
   // router.get('/stylesheets/style.css', function(req, res, next){
